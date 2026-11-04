@@ -18,4 +18,4 @@ libs\LibStub.lua
 libs\TaintLess.xml [AllowLoadGameType vanilla tbc wrath]
 libs\LibAHTab\LibAHTab.xml
 
-Frames\Auctionite.xml
+Auctionite.xml
