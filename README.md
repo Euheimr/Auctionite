@@ -1,15 +1,13 @@
 # Auctionite
+> _An Auction House Addon for the Modern Auctioneer_
 
-> **An Auction House Addon for the Modern Auctioneer** on __Classic__ (Project Camelot), __Vanilla__ & __TBC__
-
-
-Inspired by `Auctionator` (by `plusmouse`), & `Attune` (by `CixiDelmont`).
-
-**Auctionite** redesigns the Auction House frame & synchronizes prices with your friends and guild who also have Auctionite.
+Inspired by **Auctionator** (by `plusmouse`) & **Attune** (by `CixiDelmont`).
 
 ## __Features__
 
-> `/nite` to show __Auctionite__
+**Auctionite** redesigns the Auction House frame & synchronizes prices with your friends and guild who also have **Auctionite**.
+
+> `/auctionite` or `/nite` to show __Auctionite__
 
 [Images/auctionite.gif]
 
@@ -18,50 +16,48 @@ Inspired by `Auctionator` (by `plusmouse`), & `Attune` (by `CixiDelmont`).
 - *Premade Shopping Lists* - by Profession & Class
 - *Record Book* - AH Postings & Money earned/spent are recorded
 
+## Development
 
-## TODO
+### TODO
 
 - Game Version Support
     - [x] Forever     (PRIORITY)
-    - [x] Mainline    (PLANNED)
-    - [-] Vanilla     (PLANNED)
-    - [-] TBC         (PLANNED)
-    - [-] Wrath       (LOW PRIO)
-    - [-] Cataclysm   (LOW PRIO)
-    - [-] Mists       (LOW PRIO)
+    - [x] Mainline    (PRIORITY)
+    - [ ] Vanilla     (PLANNED)
+    - [ ] TBC         (PLANNED)
+    - [ ] Wrath       (LOW PRIO)
+    - [ ] Cataclysm   (LOW PRIO)
+    - [ ] Mists       (LOW PRIO)
 - Features
     - [x] AuctioniteFrame
     - [x] AuctioniteFrame.Tabs
-      - [ ] Scan
-      - [ ] Search
-          - [ ] History (BUTTON?)
-          - [ ] List
-      - [x] Buy
-          - [x] BuyItem
-          - [ ] BuyToken
-      - [x] Sell
-          - [x] SellItem
-          - [ ] SellToken
-      - [ ] Records
-          - [ ] Posting - Time, Expired/Sold
-          - [ ] Deposits - Paid, Total Deposit Amount
-          - [ ] Statistics
-      - [x] Config
-          - [ ] Addons Config Menu Integration
-          - [ ] Import/Export
-              - [ ] Auctionite (this addon)
-              - [ ] Auctionator
-              - [ ] Auctioneer
-          - [ ] P2P Sync - Friends that have Auctionite may broadcast price updates
-      - [ ] Credits - devs & localizers
-
-## Development
+        - [ ] Scan
+        - [ ] Search
+            - [ ] History (BUTTON?)
+            - [ ] List
+        - [x] Buy
+            - [x] BuyItem
+            - [x] BuyToken
+        - [x] Sell
+            - [x] SellItem
+            - [x] SellToken
+        - [ ] Records
+            - [ ] Posting - Time, Expired/Sold
+            - [ ] Deposits - Paid, Total Deposit Amount
+            - [ ] Statistics
+        - [ ] Config Menu Integration
+        - [ ] Data Import/Export
+            - [ ] Auctionite (this addon)
+            - [ ] P2P Sync - Friends that have Auctionite may broadcast price updates
+            - [ ] Auctionator
+            - [ ] Auctioneer
+        - [ ] Credits - devs & localizers
 
 ### Why
 
 Simple answer is: there are no real reasonable alternatives control and view the Action House in the way I wish, and want a better Auctioning experience that exceeds the abilities of `Auctionator`.
 
-Also, special thank you to plusmouse for `Auctionator`! It's great; been using it for several years. 
+Also, special thank you to **plusmouse** for `Auctionator`! It's great; been using it for several years. 
 `Auctionator` inspired me to go out on my own and make this project. Thank you!
 
 
