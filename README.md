@@ -18,42 +18,6 @@ Inspired by **Auctionator** (by `plusmouse`) & **Attune** (by `CixiDelmont`).
 
 ## Development
 
-### TODO
-
-- Game Version Support
-    - [x] Forever     (PRIORITY)
-    - [x] Mainline    (PRIORITY)
-    - [ ] Vanilla     (PLANNED)
-    - [ ] TBC         (PLANNED)
-    - [ ] Wrath       (LOW PRIO)
-    - [ ] Cataclysm   (LOW PRIO)
-    - [ ] Mists       (LOW PRIO)
-- Features
-    - [ ] Config Menu Integration -> `Auctionite.Config`
-    - [x] Root Frame -> `AuctioniteFrame`
-    - [x] Root Hook -> `AuctioniteFrameMixin:OnLoad(...)`
-    - [ ] Scan `AuctionData` -> `AUCTIONITE_DB`
-        - [ ] `UpdateDb(...)` -> `AUCTIONITE_DB`
-        - Import/Export
-          - [ ] P2P Sync - Friends that have Auctionite may broadcast price updates
-          - [ ] Auctionator DB
-          - [ ] Auctioneer DB
-    - [x] `LibAHTab` -> `AuctioniteFrame.Tabs`
-        - [ ] SearchTab
-            - [ ] History (BUTTON?)
-            - [ ] Lists(...)
-        - [x] Buy
-            - [x] BuyItem(...)
-            - [x] BuyToken(...)
-        - [x] Sell
-            - [x] SellItem(...)
-            - [x] SellToken(...)
-        - [ ] Records
-            - [ ] Posting - Time, Expired/Sold
-            - [ ] Deposits - Paid, Total Deposit Amount
-            - [ ] Statistics
-        - [ ] Credits - devs & localizers
-
 ### Why
 
 Simple answer is: there are no real reasonable alternatives control and view the Action House in the way I wish, and want a better Auctioning experience that exceeds the abilities of `Auctionator`.
@@ -69,6 +33,57 @@ Would like to know more? Here's a few key definitions in the `WoW Addon` context
 
 - `XML` details UI elements (placement)
 - `Lua` defines behavior (using `Mixin`s tied to said `XML` elements)
+
+
+### TODO
+
+- Game Version Support
+    - [x] Forever     (PRIORITY)
+    - [x] Mainline    (PRIORITY)
+    - [ ] Vanilla     (PLANNED)
+    - [ ] TBC         (PLANNED)
+    - [ ] Wrath       (LOW PRIO)
+    - [ ] Cataclysm   (LOW PRIO)
+    - [ ] Mists       (LOW PRIO)
+
+
+- External Libraries
+  - `LibStub` (Public Domain) by: Kaelten, Cladhaire, ckknight, Mikk, Ammo, Nevcairiel, joshborke
+  - `LibAHTab` (MIT) by: plusmouse
+    - tab frames made easier
+  - `Taintless.xml` by: townlong-yak (Only: vanilla, tbc, wrath)
+
+
+- API Features
+    - [x] Namespace `Auctionite`
+    - [x] Call order `Auctionite.toc` -> `Auctionite.xml` (Base Frames) -> `Auctionite.lua` -> `AuctioniteFrameMixin:OnLoad(...)`
+    - [x] Root Frame `Auctionite.Frame` <- `AuctioniteFrameMixin`
+    - [x] `Auctionite.Events` - Registered Blizzard UI Events to be processed
+    - [ ] `Auctionite.Queue` - Event Queue to handle **Auctionite-specific events**
+    - [ ] `Auctionite.Config` - Config Menu Integration
+    - [x] `AUCTIONITE_DB`
+        - [ ] Scan `AuctionData` 
+        - [ ] `UpdateDb(...)`
+        - [ ] Auctionite P2P Sync
+        - Import/Export -> `AUCTIONITE_DB`
+            - [ ] Database <- Auctionator
+            - [ ] Database <- Auctioneer
+    - [x] `AuctioniteFrame.Tabs` <- `libs/LibAHTab` library by **plusmouse**
+        - [ ] `SearchTab`
+            - [ ] Filter
+            - [ ] History
+            - [ ] Lists(...)
+            - [x] BuyItem(...)
+            - [x] BuyToken(...)
+        - [x] `SellTab`
+            - [x] SellItem(...)
+            - [x] SellToken(...)
+        - [ ] `AuctionsTab` - user-posted auctions
+            - [ ] Cancel Auction
+        - [ ] `RecordsTab` - Time, Expired/Sold
+            - [ ] Deposits - Paid, Total Deposit Amount
+            - [ ] Statistics
+        - [ ] `CreditsTab` - devs & localizers
 
 
 #### References

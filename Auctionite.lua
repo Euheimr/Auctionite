@@ -14,7 +14,7 @@ AUCTIONITE_DB = AUCTIONITE_DB or {}
 Auctionite = Auctionite or {
    Frame = AuctioniteFrameMixin,                       -- AuctioniteFrame of course
    lastUpdate = AuctioniteFrameMixin.lastUpdate,       -- Variable pulled & polled by AuctioniteFrame_OnUpdate() via XML
-   Events = Auctionite.Events or {},   -- OnEvent(...) Events Handler
+   Events = Auctionite.Events or {},                   -- OnEvent(...) Events Handler
    -- Setup state via SavedVariables by reference - don't copy the values
    Db = AUCTIONITE_DB,
    updateInterval = AUCTIONITE_CFG.updateInterval,
@@ -31,12 +31,12 @@ local function print(msg)
    end
 end
 
-function Auctionite:Show()
+function Auctionite:Show(self)
    self.Frame:Show()
    if debug and not self.Frame.hidden then print("shown") end
 end
 
-function Auctionite:Hide()
+function Auctionite:Hide(self)
    self.Frame:Hide()
    if debug and self.Frame.hidden then print("hidden") end
 end
@@ -44,7 +44,7 @@ end
 --- CLI ---
 SLASH_AUCTIONITE, SLASH_AUCTIONITE1 = "/auctionite", "/nite"
 
-function Auctionite:RegisterCLI()
+function Auctionite:RegisterCLI(self)
    SlashCmdList[SLASH_AUCTIONITE] = function(msg, _)
       if msg == "debug" then
          self.debug = not self.debug
@@ -106,14 +106,14 @@ function events:TRADE_SKILL_SHOW(...)
    --TODO: init professions frame
 end
 
-local function eventHandler(self, event, ...)
-   if events[event] then events[event](self, ...) end
-end
+function AuctioniteFrameMixin:RegisterEvents(self)
+   local function eventHandler(_, event, ...)
+      if events[event] then events[event](self, ...) end
+   end
 
-function Auctionite:RegisterEvents()
-   self.Frame:SetScript("OnEvent", eventHandler)
+   self:SetScript("OnEvent", eventHandler)
    for k, _ in pairs(Auctionite.Events) do
-      local ok = self.Frame:RegisterEvent(k)
+      local ok = self:RegisterEvent(k)
       if Auctionite.debug then
          if ok then print(string.format("<RegisterEvent> %s - ok", k))
          else
@@ -145,8 +145,8 @@ AuctioniteFramePopups = {
 function AuctioniteFrameMixin:OnLoad(self)
    --CallbackRegistryMixin.OnLoad(self);
 
-   Auctionite:RegisterCLI()
-   Auctionite:RegisterEvents()
+   Auctionite:RegisterCLI(self)
+   Auctionite:RegisterEvents(self)
 end
 
 ---AuctioniteFrame OnUpdate()
