@@ -1,0 +1,53 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+    ..\..\FrameXML\UI.xsd">
+    <Script File="Auctionite.lua"/>
+    <Frame name="AuctioniteFrame"
+           parent="UIParent"
+           template="AuctionHouseFrame"
+           hidden="false"
+           enableMouse="true"
+           movable="false">
+        <Size x="63" y="40"/>
+        <Anchors>
+            <Anchor point="TOPLEFT">
+                <Offset x="20" y="-55"/>
+            </Anchor>
+        </Anchors>
+
+        <Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background"
+                  edgeFile="Interface\Tooltips\UI-Tooltip-Border"
+                  tile="true">
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="4" right="3" top="4" bottom="3"/>
+            </BackgroundInsets>
+            <Color r="0.2" g="0.2" b="0.2" a="0.7"/>
+        </Backdrop>
+
+        <Frames>
+            <!-- TODO: construct each Tab Frame and draw the Tab Buttons? -->
+            <Frame name="$parent_Search">
+                <!-- Auction House Search/Shopping Frame -->
+            </Frame>
+            <Frame name="$parent_Records">
+                <!-- Records is a Frame for sales tracking -->
+
+            </Frame>
+            <Frame name="$parent_Config">
+
+            </Frame>
+        </Frames>
+
+        <Scripts>
+            <OnLoad function="$parent_OnLoad">self.lastUpdate = 0</OnLoad>
+            <OnUpdate function="$parent_OnUpdate"/>
+        </Scripts>
+    </Frame>
+</Ui>

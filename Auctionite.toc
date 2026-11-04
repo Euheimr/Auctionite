@@ -1,0 +1,21 @@
+## Title: |cffF0C060Auctionite|r
+## Version: 0.0.5
+## Notes: An Auction House Addon for the Modern Auctioneer
+## Author: Euheimr <kara@baruek.net>
+## Interface: 11508, 11509, 12000, 16001, 20506, 120100, 120105
+## X-Website: https://www.github.com/euheimr/auctionite
+## X-License: MIT
+## X-Category: Auctions/Economy
+## X-Localizations: enUS
+# ## Category-enUS: Auctions
+#   Pending support for: wrath, cata
+# ## AllowLoadGameType: forever, mainline, classic, tbc
+## SavedVariables: AUCTIONITE_CFG, AUCTIONITE_DB
+# ## SavedVariablesPerCharacter: AUCTIONITE_CFG_CHAR
+## IconTexture: Interface\Addons\Auctionite\img\Icon
+
+libs\LibStub.lua
+libs\TaintLess.xml [AllowLoadGameType vanilla tbc wrath]
+libs\LibAHTab\LibAHTab.xml
+
+Frames\Auctionite.xml

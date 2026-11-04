@@ -1,0 +1,41 @@
+{
+  "flavors": ["mainline", "classic_era"],
+  "framexml": true,
+  "globals": {
+    "allowSlashCommands": true,
+    "read": [
+      "C_Addon",
+      "LibStub",
+      "LibAHTab",
+      "AuctioniteFrameMixin"
+    ],
+    "write": [
+      "AUCTIONITE_CFG",
+      "AUCTIONITE_DB"
+    ]
+  },
+  "library": [],
+  "ignore": [".archive/", ".ref/", ".idea/", ".vscode/"],
+  "diagnostics": {
+  "disable": ["unused-local", "inject-field"],
+  "enable": ["need-check-nil"],
+  "severity": {
+    "unused-local": "warning",
+    "unused-function": "warning"
+  }
+},
+  "hint": {
+    "enable": true,
+    "parameterNames": true,
+    "variableTypes": true,
+    "functionReturnTypes": true,
+    "forVariableTypes": true,
+    "parameterTypes": true,
+    "chainedReturnTypes": false
+  },
+  "inference": {
+    "backwardParamTypes": true,
+    "correlatedReturnOverloads": true,
+    "implicitProtectedPrefix": false
+  }
+}
