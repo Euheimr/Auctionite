@@ -29,28 +29,29 @@ Inspired by **Auctionator** (by `plusmouse`) & **Attune** (by `CixiDelmont`).
     - [ ] Cataclysm   (LOW PRIO)
     - [ ] Mists       (LOW PRIO)
 - Features
-    - [x] AuctioniteFrame
-    - [x] AuctioniteFrame.Tabs
-        - [ ] Scan
-        - [ ] Search
+    - [ ] Config Menu Integration -> `Auctionite.Config`
+    - [x] Root Frame -> `AuctioniteFrame`
+    - [x] Root Hook -> `AuctioniteFrameMixin:OnLoad(...)`
+    - [ ] Scan `AuctionData` -> `AUCTIONITE_DB`
+        - [ ] `UpdateDb(...)` -> `AUCTIONITE_DB`
+        - Import/Export
+          - [ ] P2P Sync - Friends that have Auctionite may broadcast price updates
+          - [ ] Auctionator DB
+          - [ ] Auctioneer DB
+    - [x] `LibAHTab` -> `AuctioniteFrame.Tabs`
+        - [ ] SearchTab
             - [ ] History (BUTTON?)
-            - [ ] List
+            - [ ] Lists(...)
         - [x] Buy
-            - [x] BuyItem
-            - [x] BuyToken
+            - [x] BuyItem(...)
+            - [x] BuyToken(...)
         - [x] Sell
-            - [x] SellItem
-            - [x] SellToken
+            - [x] SellItem(...)
+            - [x] SellToken(...)
         - [ ] Records
             - [ ] Posting - Time, Expired/Sold
             - [ ] Deposits - Paid, Total Deposit Amount
             - [ ] Statistics
-        - [ ] Config Menu Integration
-        - [ ] Data Import/Export
-            - [ ] Auctionite (this addon)
-            - [ ] P2P Sync - Friends that have Auctionite may broadcast price updates
-            - [ ] Auctionator
-            - [ ] Auctioneer
         - [ ] Credits - devs & localizers
 
 ### Why
