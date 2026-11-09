@@ -14,8 +14,7 @@
 # ## SavedVariablesPerCharacter: AUCTIONITE_CFG_CHAR
 ## IconTexture: Interface\Addons\Auctionite\img\Icon
 
-libs\LibStub.lua
-libs\TaintLess.xml [AllowLoadGameType vanilla tbc wrath]
-libs\LibAHTab\LibAHTab.xml
+libs\Ace3\LibStub\LibStub.lua
+libs\Ace3\Ace3.lua
 
 Auctionite.xml

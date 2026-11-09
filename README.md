@@ -62,6 +62,12 @@ Would like to know more? Here's a few key definitions in the `WoW Addon` context
   - `LibAHTab` (MIT) by: plusmouse
     - tab frames made easier
   - `Taintless.xml` by: townlong-yak (Only: vanilla, tbc, wrath)
+  - Ace3 (docs: https://www.wowace.com/addons/ace3/pages/)
+    - AceAddon
+    - AceComm
+    - AceGUI
+  - LibSerialize (https://github.com/rossnichols/LibSerialize)
+  - LibDeflate (docs: https://safeteewow.github.io/LibDeflate/)
 
 
 - API Features

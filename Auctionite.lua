@@ -1,50 +1,61 @@
 local ADDON_NAME, Auctionite = ...
 
--- Load and persist
-AUCTIONITE_CFG = AUCTIONITE_CFG or {
-   updateInterval = AUCTIONITE_CFG.updateInterval or 1.0,
-   debug = AUCTIONITE_CFG.debug or false
-}
-AUCTIONITE_DB = AUCTIONITE_DB or {}
+Auctionite = LibStub("AceAddon-3.0"):NewAddon(ADDON_NAME)
+
+local AceEvent = LibStub("AceEvent-3.0"):Embed(Auctionite)
+
 
 -- TODO: check conflicts
--- conflicts = Auctionite:CheckConflicts()
+---conflicts = Auctionite:CheckConflicts()
 
--- Benevolently dictate our global Auctionite namespace via XML AuctioniteFrame OnLoad()
-Auctionite = Auctionite or {
-   Frame = AuctioniteFrameMixin,                       -- AuctioniteFrame of course
-   lastUpdate = AuctioniteFrameMixin.lastUpdate,       -- Variable pulled & polled by AuctioniteFrame_OnUpdate() via XML
-   Events = Auctionite.Events or {},                   -- OnEvent(...) Events Handler
-   -- Setup state via SavedVariables by reference - don't copy the values
-   Db = AUCTIONITE_DB,
-   updateInterval = AUCTIONITE_CFG.updateInterval,
-   debug = AUCTIONITE_CFG.debug,
-}
-local debug = Auctionite.debug
-
-
-local function print(msg)
+function print(msg)
    local color = "F0C060"
+   local dbgColor = "FFAA00"
 
-   if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage(
-         "|cff" .. color .. ADDON_NAME .. "|r: " .. tostring(msg))
+   if DEFAULT_CHAT_FRAME then
+      if Auctionite.debug == true then
+         DEFAULT_CHAT_FRAME:AddMessage(
+                 "|cff" .. color .. ADDON_NAME .. "|r "
+                         .. "|cff" .. dbgColor .. "<DEBUG>" .. "|r: " .. tostring(msg))
+      else
+         DEFAULT_CHAT_FRAME:AddMessage("|cff" .. color .. ADDON_NAME .. "|r: " .. tostring(msg))
+      end
    end
 end
 
-function Auctionite:Show(self)
-   self.Frame:Show()
-   if debug and not self.Frame.hidden then print("shown") end
-end
+--function Auctionite:Show(self)
+--   self.frame:Show()
+--   if debug and not self.frame.hidden then print("shown") end
+--end
 
-function Auctionite:Hide(self)
-   self.Frame:Hide()
-   if debug and self.Frame.hidden then print("hidden") end
-end
+--function Auctionite:Hide(self)
+--   self.frame:Hide()
+--   if debug and self.frame.hidden then print("hidden") end
+--end
 
---- CLI ---
-SLASH_AUCTIONITE, SLASH_AUCTIONITE1 = "/auctionite", "/nite"
+function Auctionite:OnInitialize(self)
+   -- load CLI commands & Saved Variables
+   -- Load and persist
+   AUCTIONITE_DB = AUCTIONITE_DB or {}
+   AUCTIONITE_CFG = AUCTIONITE_CFG or {
+      updateInterval = AUCTIONITE_CFG.updateInterval or 1.0,
+      debug = AUCTIONITE_CFG.debug or false
+   }
 
-function Auctionite:RegisterCLI(self)
+   -- Benevolently dictate our global Auctionite namespace
+
+   Auctionite = {
+      Frame = AuctioniteFrameMixin,                       -- AuctioniteFrame of course
+      lastUpdate = AuctioniteFrameMixin.lastUpdate,       -- Variable pulled & polled by AuctioniteFrame_OnUpdate() via XML
+      Events = {},                                        -- OnEvent(...) Events Handler
+      -- Setup state via SavedVariables by reference - don't copy the values
+      Db = AUCTIONITE_DB,
+      updateInterval = AUCTIONITE_CFG.updateInterval,
+      debug = AUCTIONITE_CFG.debug,
+   }
+
+   --- CLI ---
+   SLASH_AUCTIONITE, SLASH_AUCTIONITE1 = "/auctionite", "/nite"
    SlashCmdList[SLASH_AUCTIONITE] = function(msg, _)
       if msg == "debug" then
          self.debug = not self.debug
@@ -57,58 +68,10 @@ function Auctionite:RegisterCLI(self)
    end
    -- just alias
    SlashCmdList[SLASH_AUCTIONITE1] = SlashCmdList[SLASH_AUCTIONITE]
-end
---- CLI ---
+   --- CLI ---
 
---- EVENTS ---
-local events = Auctionite.Events
-
-function events:ADDON_LOADED(...)
-   print(ADDON_NAME .. " v"
-         ---@diagnostic disable-next-line: undefined-global
-         .. C_Addons:GetAddonMetadata(ADDON_NAME, "Version")
-         .. " LOADED")
-end
-
-function events:PLAYER_INTERACTION_MANAGER_FRAME_SHOW(_, _, panelType)
-   if panelType == Enum.PlayerInteractionType.Auctioneer then
-      local tabs = {
-         "Shop",
-         "Sell",
-         "WoW Token",
-      }
-      local f = Auctionite.Frame
-
-      for _, name in pairs(tabs) do
-         LibAHTab:CreateTab(name, f, name, "header")
-      end
-
-      f:SetScript("OnShow", function()
-         -- do something when the tab is selected
-         LibAHTab:SetSelected(0)
-      end)
-   end
-end
-
-function events:AUCTION_HOUSE_SHOW(...)
-   Auctionite:Show();
-end
-
-function events:AUCTION_HOUSE_HIDE(...)
-   Auctionite:Hide();
-end
-
-function events:AUCTION_HOUSE_DISABLED(...)
-   print("Auction House disabled or unavailable")
-end
-
-function events:TRADE_SKILL_SHOW(...)
-   --TODO: init professions frame
-end
-
-function AuctioniteFrameMixin:RegisterEvents(self)
    local function eventHandler(_, event, ...)
-      if events[event] then events[event](self, ...) end
+      if events[event] then events[event](self.frame, ...) end
    end
 
    self:SetScript("OnEvent", eventHandler)
@@ -121,32 +84,36 @@ function AuctioniteFrameMixin:RegisterEvents(self)
          end
       end
    end
+
 end
---- EVENTS ---
 
---- AuctioniteFrame Functionality ---
-local LibAHTab = LibStub:GetLibrary("LibAHTab-1.0")
-assert(LibAHTab, "Could not load LibAHTab")
 
-AuctioniteDialogs = {
-   "BuyDialog",
-}
+   --- EVENTS ---
+   function AuctioniteFrameMixin:RegisterEvents(self)
 
-AuctioniteFramePopups = {
-   "BID_AUCTION",
-   "BUYOUT_AUCTION",
-   "CANCEL_AUCTION",
-   "TOKEN_AUCTIONABLE_TOKEN_OWNED",
-   "TOKEN_NONE_FOR_SALE",
-}
+   end
+   --- EVENTS ---
+end
+
+function Auctionite:OnEnable()
+   -- Do more initialization here, that really enables the use of your addon.
+   -- Register Events, Hook functions, Create Frames, Get information from
+   -- the game that wasn't available in OnInitialize
+end
+
+function Auctionite:OnDisable()
+   -- Unhook, Unregister Events, Hide frames that you created.
+   -- You would probably only use an OnDisable if you want to
+   -- build a "standby" mode, or be able to toggle modules on/off.
+end
 
 ---AuctioniteFrame OnLoad()
 ---@param self table AuctioniteFrame
 function AuctioniteFrameMixin:OnLoad(self)
-   --CallbackRegistryMixin.OnLoad(self);
+   CallbackRegistryMixin.OnLoad(self);
 
-   Auctionite:RegisterCLI(self)
-   Auctionite:RegisterEvents(self)
+   Auctionite:RegisterCLI()
+   Auctionite:RegisterEvents()
 end
 
 ---AuctioniteFrame OnUpdate()
@@ -161,3 +128,6 @@ function AuctioniteFrameMixin:OnUpdate(self, elapsed)
       self.lastUpdate = 0;
    end
 end
+
+
+

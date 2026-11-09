@@ -14,7 +14,7 @@
       "AUCTIONITE_DB"
     ]
   },
-  "library": [],
+  "library": ["libs/"],
   "ignore": [".archive/", ".ref/", ".idea/", ".vscode/"],
   "diagnostics": {
   "disable": ["unused-local", "inject-field"],
